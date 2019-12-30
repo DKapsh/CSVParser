@@ -19,3 +19,9 @@ TEST(CSVParser, ParseTwoValueInAString)
     EXPECT_EQ(row, ParseRow(inputString));
 }
 
+TEST(CSVParser, ParseThreeValueInAString)
+{
+    std::string inputString = "15051420,T,47.47";
+    std::vector<std::string> row = {"15051420", "T", "47.47"};
+    EXPECT_EQ(row, ParseRow(inputString));
+}
