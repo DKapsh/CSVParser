@@ -1,13 +1,27 @@
 #include <string>
 #include <vector>
+#include <stdio.h>
 #include <gtest/gtest.h>
 namespace
 {
     std::vector<std::string> ParseRow(const std::string& input)
     {
         std::vector<std::string> row;
-        row.push_back(input.substr(0, input.find(',')));
-        row.push_back(input.substr(input.find(',')+1, input.length() - row[0].length() -1));
+        int posPrev = 0;
+        int posNext = input.find(',', posPrev);
+        row.push_back(input.substr(posPrev, posNext));
+        posPrev = posNext + 1;
+        posNext = input.find(',', posPrev);
+        if(posNext == std::string::npos)
+        {
+            posNext == input.length();
+            row.push_back(input.substr(posPrev, posNext - posPrev));
+            return row;
+        }
+        row.push_back(input.substr(posPrev, posNext - posPrev));
+        posPrev = posNext + 1;
+        row.push_back(input.substr(posPrev, input.length() - posPrev));
+        printf("%s\n", row[1].data());
         return row;
     }
 }
