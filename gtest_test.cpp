@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
+#include <sstream>
 #include <gtest/gtest.h>
 namespace
 {
@@ -20,6 +21,11 @@ namespace
             posPrev = posNext + 1;
         }
         return row;
+    }
+
+    std::vector<std::string> ReadRows(std::stringstream& ss)
+    {
+        return {};
     }
 }
 
@@ -42,5 +48,12 @@ TEST(CSVParser, ParseAllValuesInAString)
     std::string inputString = "15051420,T,47.47,10,47.51,14,10253";
     std::vector<std::string> row = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
     EXPECT_EQ(row, SplitString(inputString));
+}
+
+TEST(CSVParser, GetTwoRowFromStream)
+{
+    std::stringstream in ("15051420,T,47.47,10,47.51,14,10253\n15051420,BC,77.71,12,79.13,12,14");
+    std::vector<std::string> rows = {"15051420,T,47.47,10,47.51,14,10253", "15051420,BC,77.71,12,79.13,12,14"};
+    EXPECT_EQ(rows, ReadRows(in));
 }
 
