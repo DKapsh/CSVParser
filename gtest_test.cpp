@@ -5,6 +5,11 @@
 #include <gtest/gtest.h>
 namespace
 {
+    const std::string s_marketData = R"(15051420,T,47.47,10,47.51,14,10253\n
+                                        15051420,BC,77.71,12,79.13,12,14\n
+                                        15051420,R,90,10,99.23,13,13\n
+                                        15051420,QTM,16.21,137,17.05,13,13\n
+                                        15051420,S,21.23,18,21.3,12,1505)";
     std::vector<std::string> SplitString(const std::string& input)
     {
         std::vector<std::string> row;
@@ -25,7 +30,13 @@ namespace
 
     std::vector<std::string> ReadRows(std::stringstream& ss)
     {
-        return {};
+        std::string tmp;
+        std::vector<std::string> result;
+        std::getline(ss, tmp);
+        result.push_back(tmp);
+        std::getline(ss, tmp);
+        result.push_back(tmp);
+        return result;
     }
 }
 
@@ -56,4 +67,5 @@ TEST(CSVParser, GetTwoRowFromStream)
     std::vector<std::string> rows = {"15051420,T,47.47,10,47.51,14,10253", "15051420,BC,77.71,12,79.13,12,14"};
     EXPECT_EQ(rows, ReadRows(in));
 }
+
 
