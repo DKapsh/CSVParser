@@ -68,4 +68,15 @@ TEST(CSVParser, GetTwoRowFromStream)
     EXPECT_EQ(rows, ReadRows(in));
 }
 
+TEST(CSVParser, GetFiveRowFromStream)
+{
+    std::stringstream in (s_marketData);
+    std::vector<std::string> rows = {"15051420,T,47.47,10,47.51,14,10253", 
+                                     "15051420,BC,77.71,12,79.13,12,14",
+                                     "15051420,R,90,10,99.23,13,13",
+                                     "15051420,QTM,16.21,137,17.05,13,13",
+                                     "15051420,S,21.23,18,21.3,12,1505"
+                                     };
+    EXPECT_EQ(rows, ReadRows(in));
+}
 
