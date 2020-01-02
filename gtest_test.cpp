@@ -51,11 +51,28 @@ namespace
     };
     bool operator== (const Row& lhv, const Row& rhv)
     {
+        if(lhv.timestamp == rhv.timestamp &&
+           lhv.ticker == rhv.ticker &&
+           abs(lhv.bid - rhv.bid) < 0.001 &&
+           lhv.bidSize == rhv.bidSize &&
+           abs(lhv.ask - rhv.ask) < 0.001 &&
+           lhv.askSize == rhv.askSize &&
+           lhv.volume == rhv.volume)
+        {
+            return true;
+        }
         return false;
     }
     Row SetRow(const std::vector<std::string>& splitedString)
     {
         Row result;
+        result.timestamp = atoi(splitedString[0].data());
+        result.ticker = splitedString[1];
+        result.bid = atof(splitedString[2].data());
+        result.bidSize = atoi(splitedString[3].data());
+        result.ask = atof(splitedString[4].data());
+        result.askSize = atoi(splitedString[5].data());
+        result.volume = atoi(splitedString[6].data());
         return result;
     }
 }
@@ -103,7 +120,9 @@ TEST(CSVParser, GetFiveRowFromStream)
 TEST(CSVParser, SetRowStruct)
 {
     std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
-    Row row;
+    Row row = {15051420, "T", 47.47, 10, 47.51, 14, 10253};
     EXPECT_EQ(row, SetRow(splitedRow));
 }
+
+
 
