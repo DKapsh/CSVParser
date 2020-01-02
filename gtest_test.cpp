@@ -5,11 +5,26 @@
 #include <gtest/gtest.h>
 namespace
 {
+     struct Row
+    {
+        uint64_t timestamp;
+        std::string ticker;
+        double bid;
+        uint64_t bidSize;
+        double ask;
+        uint64_t askSize;
+        uint64_t volume;
+    };
     const std::string s_marketData = "15051420,T,47.47,10,47.51,14,10253\n"
                                      "15051420,BC,77.71,12,79.13,12,14\n"
                                      "15051420,R,90,10,99.23,13,13\n"
                                      "15051420,QTM,16.21,137,17.05,13,13\n"
                                      "15051420,S,21.23,18,21.3,12,1505";
+    const std::vector<Row>s_rows = {{15051420, "T", 47.47, 10, 47.51, 14, 10253}, 
+                                    {15051420, "BC", 77.71, 12, 79.13, 12, 14},
+                                    {15051420, "R", 90, 10, 99.23, 13, 13}, 
+                                    {15051420, "QTM", 16.21, 137, 17.05, 13,13}, 
+                                    {15051420, "S", 21.23, 18, 21.3, 12, 1505}};
     std::vector<std::string> SplitString(const std::string& input)
     {
         std::vector<std::string> row;
@@ -38,17 +53,6 @@ namespace
         }
         return result;
     }
-
-    struct Row
-    {
-        uint64_t timestamp;
-        std::string ticker;
-        double bid;
-        uint64_t bidSize;
-        double ask;
-        uint64_t askSize;
-        uint64_t volume;
-    };
     bool operator== (const Row& lhv, const Row& rhv)
     {
         if(lhv.timestamp == rhv.timestamp &&
@@ -74,6 +78,10 @@ namespace
         result.askSize = atoi(splitedString[5].data());
         result.volume = atoi(splitedString[6].data());
         return result;
+    }
+    std::vector<Row> ReadData(std::stringstream& in)
+    {
+        return {};
     }
 }
 
@@ -124,5 +132,9 @@ TEST(CSVParser, SetRowStructFromSplitedString)
     EXPECT_EQ(row, SetRow(splitedRow));
 }
 
-
+TEST(CSVParser, SetVectorOfRowsFromStream)
+{
+    std::stringstream in (s_marketData);
+    EXPECT_EQ(s_rows, ReadData(in));
+}
 
