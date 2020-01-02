@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 namespace
 {
-     struct Row
+    struct Row
     {
         uint64_t timestamp;
         std::string ticker;
@@ -79,16 +79,25 @@ namespace
         result.volume = atoi(splitedString[6].data());
         return result;
     }
-    std::vector<Row> ReadData(std::stringstream& in)
+
+    class CSVParser
     {
-        std::vector<Row> result;
-        std::vector<std::string> lines = ReadRows(in);
-        for(auto& line : lines)
-        {
-            result.push_back(SetRow(SplitString(line)));
-        }
-        return result;
-    }
+        public:
+            explicit CSVParser(std::stringstream& in)
+            {
+                std::vector<std::string> lines = ReadRows(in);
+                for(auto& line : lines)
+                {
+                    m_data.push_back(SetRow(SplitString(line)));
+                }
+            }
+            std::vector<Row> GetData()
+            {
+                return m_data;
+            }
+        private:
+            std::vector<Row> m_data;
+    };
 }
 
 TEST(CSVParser, ParseTwoValueInAString)
@@ -141,6 +150,7 @@ TEST(CSVParser, SetRowStructFromSplitedString)
 TEST(CSVParser, SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData);
-    EXPECT_EQ(s_rows, ReadData(in));
+    CSVParser parser(in);
+    EXPECT_EQ(s_rows, parser.GetData());
 }
 
