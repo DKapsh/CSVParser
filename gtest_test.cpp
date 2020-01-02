@@ -97,8 +97,12 @@ namespace
             }
             uint64_t VolumeSum()
             {
-                
-                return 0;
+                uint64_t sum = 0;
+                for(const auto& row : m_data)
+                {
+                    sum += row.volume;
+                }
+                return sum;
             }
         private:
             std::vector<Row> m_data;
