@@ -38,6 +38,26 @@ namespace
         }
         return result;
     }
+
+    struct Row
+    {
+        uint64_t timestamp;
+        std::string ticker;
+        double bid;
+        uint64_t bidSize;
+        double ask;
+        uint64_t askSize;
+        uint64_t volume;
+    };
+    bool operator== (const Row& lhv, const Row& rhv)
+    {
+        return false;
+    }
+    Row SetRow(const std::vector<std::string>& splitedString)
+    {
+        Row result;
+        return result;
+    }
 }
 
 TEST(CSVParser, ParseTwoValueInAString)
@@ -78,5 +98,12 @@ TEST(CSVParser, GetFiveRowFromStream)
                                      "15051420,S,21.23,18,21.3,12,1505"
                                      };
     EXPECT_EQ(rows, ReadRows(in));
+}
+
+TEST(CSVParser, SetRowStruct)
+{
+    std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
+    Row row;
+    EXPECT_EQ(row, SetRow(splitedRow));
 }
 
