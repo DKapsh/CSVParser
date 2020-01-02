@@ -84,16 +84,28 @@ namespace
     {
         public:
             explicit CSVParser(std::stringstream& in)
-            {
-                std::vector<std::string> lines = ReadRows(in);
-                for(auto& line : lines)
-                {
-                    m_data.push_back(SetRow(SplitString(line)));
-                }
+            {   
+                m_lines = ReadRows(in);
             }
-            std::vector<Row> GetData()
+            std::vector<Row> ParseData()
             {
-                return m_data;
+                std::vector<Row> result;
+                for(auto& line : m_lines)
+                {
+                    result.push_back(SetRow(SplitString(line)));
+                }
+                return result;
+            }
+            
+        private:
+            std::vector<std::string> m_lines;
+    };
+    class MetricsCalculator
+    {
+        public:
+            explicit MetricsCalculator(const std::vector<Row>& data):m_data(data)
+            {
+
             }
             uint64_t VolumeSum()
             {
@@ -160,14 +172,13 @@ TEST(CSVParser, SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData);
     CSVParser parser(in);
-    EXPECT_EQ(s_rows, parser.GetData());
+    EXPECT_EQ(s_rows, parser.ParseData());
 }
 
 TEST(MetricsCounter, ReturnCorrectVolumeSummIfMarketDataSet)
 {
-    std::stringstream in (s_marketData);
-    CSVParser parser(in);
+    MetricsCalculator calculator(s_rows);
     uint64_t volumeSum = 11798;
-    EXPECT_EQ(volumeSum, parser.VolumeSum());
+    EXPECT_EQ(volumeSum, calculator.VolumeSum());
 }
 
