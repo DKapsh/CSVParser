@@ -95,6 +95,11 @@ namespace
             {
                 return m_data;
             }
+            uint64_t VolumeSum()
+            {
+                
+                return 0;
+            }
         private:
             std::vector<Row> m_data;
     };
@@ -152,5 +157,13 @@ TEST(CSVParser, SetVectorOfRowsFromStream)
     std::stringstream in (s_marketData);
     CSVParser parser(in);
     EXPECT_EQ(s_rows, parser.GetData());
+}
+
+TEST(MetricsCounter, ReturnCorrectVolumeSummIfMarketDataSet)
+{
+    std::stringstream in (s_marketData);
+    CSVParser parser(in);
+    uint64_t volumeSum = 11798;
+    EXPECT_EQ(volumeSum, parser.VolumeSum());
 }
 
