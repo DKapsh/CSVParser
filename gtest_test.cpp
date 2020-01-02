@@ -81,7 +81,13 @@ namespace
     }
     std::vector<Row> ReadData(std::stringstream& in)
     {
-        return {};
+        std::vector<Row> result;
+        std::vector<std::string> lines = ReadRows(in);
+        for(auto& line : lines)
+        {
+            result.push_back(SetRow(SplitString(line)));
+        }
+        return result;
     }
 }
 
