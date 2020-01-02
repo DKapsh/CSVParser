@@ -117,7 +117,7 @@ TEST(CSVParser, GetFiveRowFromStream)
     EXPECT_EQ(rows, ReadRows(in));
 }
 
-TEST(CSVParser, SetRowStruct)
+TEST(CSVParser, SetRowStructFromSplitedString)
 {
     std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
     Row row = {15051420, "T", 47.47, 10, 47.51, 14, 10253};
