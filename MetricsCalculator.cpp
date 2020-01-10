@@ -13,8 +13,16 @@ uint64_t metrics::MetricsCalculator::VolumeSum()
     uint64_t sum = 0;
     for(const auto& row : m_data)
     {
-        sum += row.volume;
+        if(row.ticker == "T")
+        {
+            sum += row.volume;
+        }
     }
     return sum;
+}
+
+void metrics::MetricsCalculator::SetTickerType(const std::string& tickerType)
+{
+    
 }
  

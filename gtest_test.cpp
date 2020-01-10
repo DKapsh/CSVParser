@@ -19,6 +19,8 @@ namespace
                                     {15051420, "R", 90, 10, 99.23, 13, 13}, 
                                     {15051420, "QTM", 16.21, 137, 17.05, 13,13}, 
                                     {15051420, "S", 21.23, 18, 21.3, 12, 1505}};
+    const std::vector<row::Row>s_rowsWithQTMTiker = { {15051420, "QTM", 16.21, 137, 17.05, 13, 13},
+                                                      {15051421, "QTM", 16.21, 137, 17.05, 13, 13}};
 }
 
 TEST(CSVParser, ParseTwoValueInAString)
@@ -75,10 +77,20 @@ TEST(CSVParser, SetVectorOfRowsFromStream)
     EXPECT_EQ(s_rows, parser.ParseData());
 }
 
-TEST(MetricsCounter, ReturnCorrectVolumeSummIfMarketDataSet)
+TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerT)
 {
     metrics::MetricsCalculator calculator(s_rows);
-    uint64_t volumeSum = 11798;
+    uint64_t volumeSum = 10253;
+    calculator.SetTickerType("T");
     EXPECT_EQ(volumeSum, calculator.VolumeSum());
 }
+
+TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerQTM)
+{
+    metrics::MetricsCalculator calculator(s_rows);
+    uint64_t volumeSum = s_rowsWithQTMTiker[0].volume+ s_rowsWithQTMTiker[1].volume;
+    calculator.SetTickerType("QTM");
+    EXPECT_EQ(volumeSum, calculator.VolumeSum());
+}
+
 
