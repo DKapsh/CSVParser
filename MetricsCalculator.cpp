@@ -36,6 +36,6 @@ std::vector<double> metrics::MetricsCalculator::AskSubBid()
             result.push_back(row.ask - row.bid);
         }
     }
-    return {};
+    return result;
 }
  
