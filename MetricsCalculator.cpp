@@ -25,4 +25,9 @@ void metrics::MetricsCalculator::SetTickerType(const std::string& tickerType)
 {
     m_tickerType = tickerType;
 }
+
+std::vector<double> metrics::MetricsCalculator::AskSubBid()
+{
+    return {};
+}
  

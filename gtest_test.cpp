@@ -93,4 +93,12 @@ TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerQTM)
     EXPECT_EQ(volumeSum, calculator.VolumeSum());
 }
 
+TEST(MetricsCounter, SubAskBid_Return0_04IfTickerTypeT)
+{
+    metrics::MetricsCalculator calculator(s_rows);
+    std::vector<double> askSubBid = {0.04};
+    calculator.SetTickerType("T");
+    EXPECT_EQ(askSubBid, calculator.AskSubBid());
+}
+
 
