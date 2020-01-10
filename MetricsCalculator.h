@@ -14,6 +14,7 @@ namespace metrics
             uint64_t VolumeSum();
         private:
             std::vector<row::Row> m_data;
+            std::string m_tickerType;
     };
 }
 
