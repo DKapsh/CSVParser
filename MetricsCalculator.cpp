@@ -28,6 +28,14 @@ void metrics::MetricsCalculator::SetTickerType(const std::string& tickerType)
 
 std::vector<double> metrics::MetricsCalculator::AskSubBid()
 {
+    std::vector<double> result;
+    for(const auto& row : m_data)
+    {
+        if(row.ticker == m_tickerType)
+        {
+            result.push_back(row.ask - row.bid);
+        }
+    }
     return {};
 }
  
