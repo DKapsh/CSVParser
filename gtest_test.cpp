@@ -99,7 +99,7 @@ TEST(MetricsCounter, SubAskBid_Return0_04IfTickerTypeT)
     std::vector<double> askSubBid = {0.04};
     calculator.SetTickerType("T");
     const double absError = 0.001;
-    EXPECT_DOUBLE_EQ(askSubBid[0], calculator.AskSubBid()[0]);
+    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid()[0], absError);
 }
 
 
