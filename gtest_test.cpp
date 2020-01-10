@@ -85,12 +85,12 @@ TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerT)
     EXPECT_EQ(volumeSum, calculator.VolumeSum());
 }
 
-/*TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerQTM)
+TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerQTM)
 {
     metrics::MetricsCalculator calculator(s_rows);
     uint64_t volumeSum = s_rowsWithQTMTiker[0].volume+ s_rowsWithQTMTiker[1].volume;
     calculator.SetTickerType("QTM");
     EXPECT_EQ(volumeSum, calculator.VolumeSum());
-}*/
+}
 
 
