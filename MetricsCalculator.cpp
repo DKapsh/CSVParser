@@ -42,6 +42,6 @@ std::vector<double> metrics::MetricsCalculator::AskSubBid()
 
 double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
 {
-    return 0;
+    return std::min(data.begin(), data.end())[0];
 }
  
