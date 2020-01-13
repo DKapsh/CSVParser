@@ -44,4 +44,8 @@ double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
 {
     return *(std::min_element(data.begin(), data.end()));
 }
- 
+
+double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
+{
+    return 0;
+}

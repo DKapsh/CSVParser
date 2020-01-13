@@ -14,6 +14,7 @@ namespace metrics
             uint64_t VolumeSum();
             std::vector<double> AskSubBid();
             double GetMin(const std::vector<double>& data);
+            double GetMax(const std::vector<double>& data);
         private:
             std::vector<row::Row> m_data;
             std::string m_tickerType;

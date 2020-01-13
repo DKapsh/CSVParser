@@ -124,6 +124,15 @@ TEST(MetricsCounter, MinOfSubAskAndBid_Return0_05IfTickerTypeQTM)
     EXPECT_NEAR(min, calculator.GetMin(calculator.AskSubBid()), absError);
 }
 
+TEST(MetricsCounter, MaxOfSubAskAndBid_Return0_84IfTickerTypeQTM)
+{
+    metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
+    double max = 0.84;
+    calculator.SetTickerType("QTM");
+    const double absError = 0.001;
+    EXPECT_NEAR(max, calculator.GetMax(calculator.AskSubBid()), absError);
+}
+
 
 
 
