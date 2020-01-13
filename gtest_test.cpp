@@ -21,6 +21,9 @@ namespace
                                     {15051420, "S", 21.23, 18, 21.3, 12, 1505}};
     const std::vector<row::Row>s_rowsWithQTMTiker = { {15051420, "QTM", 16.21, 137, 17.05, 13, 13},
                                                       {15051421, "QTM", 16.21, 137, 17.05, 13, 13}};
+    const std::vector<row::Row>s_qtmTikerWithDifferentBid = {{15051420, "QTM", 16.21, 137, 17.05, 13, 13},
+                                                             {15051777,"QTM",17,11,17.05,19,54341}};
+                                                
 }
 
 TEST(CSVParser, ParseTwoValueInAString)
@@ -101,5 +104,18 @@ TEST(MetricsCounter, SubAskBid_Return0_04IfTickerTypeT)
     const double absError = 0.001;
     EXPECT_NEAR(askSubBid[0], calculator.AskSubBid()[0], absError);
 }
+
+TEST(MetricsCounter, SubAskBid_ReturnCorrectResultsIfTickerTypeQTM)
+{
+    metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
+    std::vector<double> askSubBid = {0.84, 0.05};
+    calculator.SetTickerType("QTM");
+    const double absError = 0.001;
+    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid()[0], absError);
+    EXPECT_NEAR(askSubBid[1], calculator.AskSubBid()[1], absError);
+}
+
+
+
 
 
