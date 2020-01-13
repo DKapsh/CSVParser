@@ -2,6 +2,7 @@
 #include <vector>
 #include <stdio.h>
 #include <sstream>
+#include <algorithm>
 #include "MetricsCalculator.h"
 
 metrics::MetricsCalculator::MetricsCalculator(const std::vector<row::Row>& data):m_data(data)
@@ -37,5 +38,10 @@ std::vector<double> metrics::MetricsCalculator::AskSubBid()
         }
     }
     return result;
+}
+
+double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
+{
+    return 0;
 }
  
