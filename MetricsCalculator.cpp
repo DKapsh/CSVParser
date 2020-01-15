@@ -62,5 +62,12 @@ double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
 
 double metrics::MetricsCalculator::GetRatio()
 {
-    return (m_data[0].bid*m_data[0].askSize + m_data[0].ask*m_data[0].bidSize)/(m_data[0].askSize+m_data[0].bidSize);
+    double numerator = 0;
+    double denumerator = 0;
+    for(const auto& row : m_data)
+    {
+        numerator += row.bid * row.askSize + row.ask * row.bidSize;
+        denumerator += row.askSize+row.bidSize;
+    }
+    return numerator/denumerator;
 }
