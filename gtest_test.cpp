@@ -144,5 +144,13 @@ TEST(MetricsCounter, MinOfSubAskAndBid_ThrowIfDataIsEmpty)
     metrics::MetricsCalculator calculator({});
     EXPECT_THROW(calculator.GetMin({}), std::exception);
 }
+TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
+{
+    row::Row qtmTiker = {15051420, "QTM", 16.21, 137, 17.05, 13, 13};
+    metrics::MetricsCalculator calculator({qtmTiker});
+    double result = (qtmTiker.bid*qtmTiker.askSize + qtmTiker.bidSize*qtmTiker.ask)/(qtmTiker.askSize+qtmTiker.bidSize);
+    const double absError = 0.001;
+    EXPECT_NEAR(result, calculator.GetRatio(), absError);
+}
 
 

@@ -59,3 +59,8 @@ double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
     }
     return *(std::max_element(data.begin(), data.end()));
 }
+
+double metrics::MetricsCalculator::GetRatio()
+{
+    return 0;
+}
