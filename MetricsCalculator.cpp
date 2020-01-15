@@ -44,6 +44,10 @@ std::vector<double> metrics::MetricsCalculator::AskSubBid()
 
 double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
 {
+    if (data.empty())
+    {
+        throw std::runtime_error {"Input vector is empty"};
+    }
     return *(std::min_element(data.begin(), data.end()));
 }
 
