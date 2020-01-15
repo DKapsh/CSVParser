@@ -4,6 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
 #include "MetricsCalculator.h"
 
 metrics::MetricsCalculator::MetricsCalculator(const std::vector<row::Row>& data):m_data(data)
@@ -48,5 +49,9 @@ double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
 
 double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
 {
+    if (data.empty())
+    {
+        throw std::runtime_error {"Input vector is empty"};
+    }
     return *(std::max_element(data.begin(), data.end()));
 }
