@@ -22,7 +22,7 @@ namespace
     const std::vector<row::Row>s_rowsWithQTMTiker = { {15051420, "QTM", 16.21, 137, 17.05, 13, 13},
                                                       {15051421, "QTM", 16.21, 137, 17.05, 13, 13}};
     const std::vector<row::Row>s_qtmTikerWithDifferentBid = {{15051420, "QTM", 16.21, 137, 17.05, 13, 13},
-                                                             {15051777,"QTM",17,11,17.05,19,54341}};
+                                                             {15051777, "QTM", 17, 11, 17.05, 19, 54341}};
                                                 
 }
 
@@ -144,6 +144,7 @@ TEST(MetricsCounter, MinOfSubAskAndBid_ThrowIfDataIsEmpty)
     metrics::MetricsCalculator calculator({});
     EXPECT_THROW(calculator.GetMin({}), std::exception);
 }
+
 TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
 {
     row::Row qtmTiker = {15051420, "QTM", 16.21, 137, 17.05, 13, 13};
@@ -153,4 +154,10 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
     EXPECT_NEAR(result, calculator.GetRatio(), absError);
 }
 
-
+TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
+{
+    metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
+    double correctRatioForqtmTicker = 16.984;
+    const double absError = 0.0001;
+    EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(), absError);
+}
