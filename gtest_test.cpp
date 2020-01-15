@@ -133,6 +133,11 @@ TEST(MetricsCounter, MaxOfSubAskAndBid_Return0_84IfTickerTypeQTM)
     EXPECT_NEAR(max, calculator.GetMax(calculator.AskSubBid()), absError);
 }
 
+TEST(MetricsCounter, MaxOfSubAskAndBid_NoThrowIfDataIsEmpty)
+{
+    metrics::MetricsCalculator calculator({});
+    EXPECT_THROW(calculator.GetMax({}), std::exception);
+}
 
 
 

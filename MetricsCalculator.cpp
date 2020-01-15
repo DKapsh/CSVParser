@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <algorithm>
+#include <iostream>
 #include "MetricsCalculator.h"
 
 metrics::MetricsCalculator::MetricsCalculator(const std::vector<row::Row>& data):m_data(data)
