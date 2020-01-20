@@ -19,6 +19,11 @@ namespace
                                     {15051420, "R", 90, 10, 99.23, 13, 13}, 
                                     {15051420, "QTM", 16.21, 137, 17.05, 13,13}, 
                                     {15051420, "S", 21.23, 18, 21.3, 12, 1505}};
+    const std::map<std::string, std::vector<row::Quote>> s_tickerData = {{"T",  {{15051420, 47.47, 10, 47.51, 14, 10253}}},
+                                                                         {"BC", {{15051420, 77.71, 12, 79.13, 12, 14}}},
+                                                                         {"R",  {{15051420, 90, 10, 99.23, 13, 13}}},
+                                                                         {"QTM",{{15051420, 16.21, 137, 17.05, 13,13}}},
+                                                                         {"S",  {{15051420, 21.23, 18, 21.3, 12, 1505}}}};
     const std::vector<row::Row>s_rowsWithQTMTiker = { {15051420, "QTM", 16.21, 137, 17.05, 13, 13},
                                                       {15051421, "QTM", 16.21, 137, 17.05, 13, 13}};
     const std::vector<row::Row>s_qtmTikerWithDifferentBid = {{15051420, "QTM", 16.21, 137, 17.05, 13, 13},
@@ -81,16 +86,18 @@ TEST(CSVParser, SetRowStructFromSplitedStringInMapWithOneElement)
     std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
     row::Quote row = {15051420, 47.47, 10, 47.51, 14, 10253};
     std::map<std::string, std::vector<row::Quote>> inputMap = {{"T", {row}}};
-    std::map<std::string, std::vector<row::Quote>> outputMap = {{"T", {{row, row}}}};
+    std::map<std::string, std::vector<row::Quote>> outputMap = {{"T", {row, row}}};
     utils::SetRow(splitedRow, inputMap);
     EXPECT_EQ(outputMap, inputMap);
 }
 
-TEST(CSVParser, DISABLED_SetVectorOfRowsFromStream)
+TEST(CSVParser, SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData);
     parser::CSVParser parser(in);
-    EXPECT_EQ(s_rows, parser.ParseData());
+    std::map<std::string, std::vector<row::Quote>> tickerMap;
+    parser.ParseData(tickerMap);
+    EXPECT_EQ(s_tickerData, tickerMap);
 }
 
 TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerT)

@@ -2,6 +2,7 @@
 #include <vector>
 #include <stdio.h>
 #include <sstream>
+#include <map>
 #include "Row.h"
 namespace parser
 {
@@ -9,7 +10,7 @@ namespace parser
     {
         public:
             explicit CSVParser(std::stringstream& in);
-            std::vector<row::Row> ParseData();
+            void ParseData(std::map<std::string, std::vector<row::Quote>>& inputData);
             
         private:
             std::vector<std::string> m_lines;

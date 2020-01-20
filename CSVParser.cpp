@@ -10,12 +10,11 @@ parser::CSVParser::CSVParser(std::stringstream& in)
     m_lines = utils::ReadRows(in);
 }
 
-std::vector<row::Row> parser::CSVParser::ParseData()
+void parser::CSVParser::ParseData(std::map<std::string, std::vector<row::Quote>>& inputData)
 {
     std::vector<row::Row> result;
     for(auto& line : m_lines)
     {
-        result.push_back(utils::SetRow(utils::SplitString(line)));
+        utils::SetRow(utils::SplitString(line), inputData);
     }
-    return result;
 }
