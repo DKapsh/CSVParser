@@ -48,7 +48,14 @@ row::Row utils::SetRow(const std::vector<std::string>& splitedString)
 
 void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::string, std::vector<row::Quote>>& inputData)
 {
-
+    row::Quote tmp;
+    tmp.timestamp = atoi(splitedString[0].data());
+    tmp.bid = atof(splitedString[2].data());
+    tmp.bidSize = atoi(splitedString[3].data());
+    tmp.ask = atof(splitedString[4].data());
+    tmp.askSize = atoi(splitedString[5].data());
+    tmp.volume = atoi(splitedString[6].data()); 
+    inputData.insert({splitedString[1],{tmp}});
 }
 
 
