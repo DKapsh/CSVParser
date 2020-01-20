@@ -66,14 +66,17 @@ TEST(CSVParser, GetFiveRowFromStream)
     EXPECT_EQ(rows, utils::ReadRows(in));
 }
 
-TEST(CSVParser, SetRowStructFromSplitedString)
+TEST(CSVParser, SetRowStructFromSplitedStringInEmptyMap)
 {
     std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
-    row::Row row = {15051420, "T", 47.47, 10, 47.51, 14, 10253};
-    EXPECT_EQ(row, utils::SetRow(splitedRow));
+    row::Quote row = {15051420, 47.47, 10, 47.51, 14, 10253};
+    std::map<std::string, std::vector<row::Quote>> inputMap;
+    std::map<std::string, std::vector<row::Quote>> outputMap = {{"T", {{row}}}};
+    utils::SetRow(splitedRow, inputMap);
+    EXPECT_EQ(outputMap, inputMap);
 }
 
-TEST(CSVParser, SetVectorOfRowsFromStream)
+TEST(CSVParser, DISABLED_SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData);
     parser::CSVParser parser(in);
@@ -160,4 +163,9 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
     double correctRatioForqtmTicker = 16.984;
     const double absError = 0.0001;
     EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(), absError);
+}
+
+TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
+{
+
 }

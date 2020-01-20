@@ -46,5 +46,10 @@ row::Row utils::SetRow(const std::vector<std::string>& splitedString)
     return result;
 }
 
+void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::string, std::vector<row::Quote>>& inputData)
+{
+
+}
+
 
 
