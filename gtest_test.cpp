@@ -76,6 +76,16 @@ TEST(CSVParser, SetRowStructFromSplitedStringInEmptyMap)
     EXPECT_EQ(outputMap, inputMap);
 }
 
+TEST(CSVParser, SetRowStructFromSplitedStringInMapWithOneElement)
+{
+    std::vector<std::string> splitedRow = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
+    row::Quote row = {15051420, 47.47, 10, 47.51, 14, 10253};
+    std::map<std::string, std::vector<row::Quote>> inputMap = {{"T", {row}}};
+    std::map<std::string, std::vector<row::Quote>> outputMap = {{"T", {{row, row}}}};
+    utils::SetRow(splitedRow, inputMap);
+    EXPECT_EQ(outputMap, inputMap);
+}
+
 TEST(CSVParser, DISABLED_SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData);
