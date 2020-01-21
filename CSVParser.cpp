@@ -12,7 +12,6 @@ parser::CSVParser::CSVParser(std::stringstream& in)
 
 void parser::CSVParser::ParseData(std::map<std::string, std::vector<row::Quote>>& inputData)
 {
-    std::vector<row::Row> result;
     for(auto& line : m_lines)
     {
         utils::SetRow(utils::SplitString(line), inputData);
