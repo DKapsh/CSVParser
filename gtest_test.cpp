@@ -175,7 +175,13 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
-    std::vector<row::Output> outputData = {{"QTM", 0.84, 0.84, 13, 16.977}};
+    std::vector<row::Output> outputData = {{"QTM", 0.84, 0.05, 26, 16.977}};
+    EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
+}
+
+TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
+{
+    std::vector<row::Output> outputData = {{"QTM", 0.84, 0.84, 13, 16.984}};
     std::vector<row::Quote>qtmTiker = { {15051420, 16.21, 137, 17.05, 13, 13}};
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", qtmTiker));
 }
