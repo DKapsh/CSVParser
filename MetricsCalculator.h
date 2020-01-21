@@ -11,8 +11,8 @@ namespace metrics
         public:
             explicit MetricsCalculator(const std::vector<row::Row>& data);
             void SetTickerType(const std::string& tickerType);
-            uint64_t VolumeSum();
-            std::vector<double> AskSubBid();
+            uint64_t VolumeSum(const std::vector<row::Quote>& data);
+            std::vector<double> AskSubBid(const std::vector<row::Quote>& data);
             double GetMin(const std::vector<double>& data);
             double GetMax(const std::vector<double>& data);
             double GetRatio();

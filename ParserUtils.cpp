@@ -33,19 +33,6 @@ std::vector<std::string> utils::ReadRows(std::stringstream& ss)
     return result;
 }
 
-row::Row utils::SetRow(const std::vector<std::string>& splitedString)
-{
-    row::Row result;
-    result.timestamp = atoi(splitedString[0].data());
-    result.ticker = splitedString[1];
-    result.bid = atof(splitedString[2].data());
-    result.bidSize = atoi(splitedString[3].data());
-    result.ask = atof(splitedString[4].data());
-    result.askSize = atoi(splitedString[5].data());
-    result.volume = atoi(splitedString[6].data());
-    return result;
-}
-
 void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::string, std::vector<row::Quote>>& inputData)
 {
     row::Quote tmp;

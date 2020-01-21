@@ -24,10 +24,14 @@ namespace
                                                                          {"R",  {{15051420, 90, 10, 99.23, 13, 13}}},
                                                                          {"QTM",{{15051420, 16.21, 137, 17.05, 13,13}}},
                                                                          {"S",  {{15051420, 21.23, 18, 21.3, 12, 1505}}}};
+    const std::vector<row::Quote>s_QTMTikers = { {15051420, 16.21, 137, 17.05, 13, 13},
+                                                 {15051421, 16.21, 137, 17.05, 13, 13}};
     const std::vector<row::Row>s_rowsWithQTMTiker = { {15051420, "QTM", 16.21, 137, 17.05, 13, 13},
                                                       {15051421, "QTM", 16.21, 137, 17.05, 13, 13}};
     const std::vector<row::Row>s_qtmTikerWithDifferentBid = {{15051420, "QTM", 16.21, 137, 17.05, 13, 13},
                                                              {15051777, "QTM", 17, 11, 17.05, 19, 54341}};
+    const std::vector<row::Quote>s_qtmTikersWithDifferentBid = {{15051420, 16.21, 137, 17.05, 13, 13},
+                                                                {15051777, 17, 11, 17.05, 19, 54341}};
                                                 
 }
 
@@ -103,54 +107,50 @@ TEST(CSVParser, SetVectorOfRowsFromStream)
 TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerT)
 {
     metrics::MetricsCalculator calculator(s_rows);
+    const std::vector<row::Quote> tickersT = {{15051420, 47.47, 10, 47.51, 14, 10253}};
     uint64_t volumeSum = 10253;
-    calculator.SetTickerType("T");
-    EXPECT_EQ(volumeSum, calculator.VolumeSum());
+    EXPECT_EQ(volumeSum, calculator.VolumeSum(tickersT));
 }
 
 TEST(MetricsCounter, ReturnCorrectVolumeSummIfTickerQTM)
 {
     metrics::MetricsCalculator calculator(s_rowsWithQTMTiker);
-    uint64_t volumeSum = s_rowsWithQTMTiker[0].volume+ s_rowsWithQTMTiker[1].volume;
-    calculator.SetTickerType("QTM");
-    EXPECT_EQ(volumeSum, calculator.VolumeSum());
+    uint64_t volumeSum = s_QTMTikers[0].volume+ s_QTMTikers[1].volume;
+    EXPECT_EQ(volumeSum, calculator.VolumeSum(s_QTMTikers));
 }
 
 TEST(MetricsCounter, SubAskBid_Return0_04IfTickerTypeT)
 {
     metrics::MetricsCalculator calculator(s_rows);
     std::vector<double> askSubBid = {0.04};
-    calculator.SetTickerType("T");
+    const std::vector<row::Quote> tickersT = {{15051420, 47.47, 10, 47.51, 14, 10253}};
     const double absError = 0.001;
-    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid()[0], absError);
+    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid(tickersT)[0], absError);
 }
 
 TEST(MetricsCounter, SubAskBid_ReturnCorrectResultsIfTickerTypeQTM)
 {
     metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
     std::vector<double> askSubBid = {0.84, 0.05};
-    calculator.SetTickerType("QTM");
     const double absError = 0.001;
-    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid()[0], absError);
-    EXPECT_NEAR(askSubBid[1], calculator.AskSubBid()[1], absError);
+    EXPECT_NEAR(askSubBid[0], calculator.AskSubBid(s_qtmTikersWithDifferentBid)[0], absError);
+    EXPECT_NEAR(askSubBid[1], calculator.AskSubBid(s_qtmTikersWithDifferentBid)[1], absError);
 }
 
 TEST(MetricsCounter, MinOfSubAskAndBid_Return0_05IfTickerTypeQTM)
 {
     metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
     double min = 0.05;
-    calculator.SetTickerType("QTM");
     const double absError = 0.001;
-    EXPECT_NEAR(min, calculator.GetMin(calculator.AskSubBid()), absError);
+    EXPECT_NEAR(min, calculator.GetMin(calculator.AskSubBid(s_qtmTikersWithDifferentBid)), absError);
 }
 
 TEST(MetricsCounter, MaxOfSubAskAndBid_Return0_84IfTickerTypeQTM)
 {
     metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
     double max = 0.84;
-    calculator.SetTickerType("QTM");
     const double absError = 0.001;
-    EXPECT_NEAR(max, calculator.GetMax(calculator.AskSubBid()), absError);
+    EXPECT_NEAR(max, calculator.GetMax(calculator.AskSubBid(s_qtmTikersWithDifferentBid)), absError);
 }
 
 TEST(MetricsCounter, MaxOfSubAskAndBid_ThrowIfDataIsEmpty)

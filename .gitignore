@@ -1,3 +1,6 @@
 build/
 cmake-3.10.2/
 ext/
+testResults/
+Testing/
+.vscode/

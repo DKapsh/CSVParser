@@ -11,15 +11,12 @@ metrics::MetricsCalculator::MetricsCalculator(const std::vector<row::Row>& data)
 {
 }
 
-uint64_t metrics::MetricsCalculator::VolumeSum()
+uint64_t metrics::MetricsCalculator::VolumeSum(const std::vector<row::Quote>& data)
 {
     uint64_t sum = 0;
-    for(const auto& row : m_data)
+    for(const auto& row : data)
     {
-        if(row.ticker == m_tickerType)
-        {
-            sum += row.volume;
-        }
+        sum += row.volume;
     }
     return sum;
 }
@@ -29,15 +26,12 @@ void metrics::MetricsCalculator::SetTickerType(const std::string& tickerType)
     m_tickerType = tickerType;
 }
 
-std::vector<double> metrics::MetricsCalculator::AskSubBid()
+std::vector<double> metrics::MetricsCalculator::AskSubBid(const std::vector<row::Quote>& data)
 {
     std::vector<double> result;
-    for(const auto& row : m_data)
+    for(const auto& row : data)
     {
-        if(row.ticker == m_tickerType)
-        {
-            result.push_back(row.ask - row.bid);
-        }
+        result.push_back(row.ask - row.bid);
     }
     return result;
 }
