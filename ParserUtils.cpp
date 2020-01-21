@@ -63,7 +63,6 @@ std::vector<row::Output> utils::FormedOutputData(const std::string& ticker, cons
     tmp.min = calculator.GetMin(calculator.AskSubBid(inputData));
     tmp.sum = calculator.VolumeSum(inputData);
     tmp.ratio = calculator.GetRatio(inputData);
-
     return {tmp};
 }
 

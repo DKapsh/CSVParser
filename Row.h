@@ -31,7 +31,7 @@ namespace row
         std::string ticker;
         double max;
         double min;
-        int sum;
+        long long sum;
         double ratio;
 
         bool operator== (const Output& rhv) const
