@@ -24,5 +24,27 @@ namespace row
             }
             return false;
         }
-    };   
+    }; 
+
+    struct Output
+    {
+        std::string ticker;
+        double max;
+        double min;
+        int sum;
+        double ratio;
+
+        bool operator== (const Output& rhv) const
+        {
+            if(this->ticker == rhv.ticker &&
+            abs(this->max - rhv.max) < 0.001 &&
+            abs(this->min - rhv.min) < 0.001 &&
+            abs(this->ratio - rhv.ratio) < 0.001 &&
+            this->sum == rhv.sum)
+            {
+                return true;
+            }
+            return false;
+        }
+    };  
 }

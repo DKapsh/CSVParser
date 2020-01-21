@@ -53,6 +53,10 @@ void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::
     }   
 }
 
+std::vector<row::Output> utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
+{
+    return {};
+}
 
 
 

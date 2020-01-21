@@ -161,6 +161,7 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
     row::Quote qtmTikers = {15051420, 16.21, 137, 17.05, 13, 13};
     metrics::MetricsCalculator calculator;
     double result = (qtmTikers.bid*qtmTikers.askSize + qtmTikers.bidSize*qtmTikers.ask)/(qtmTikers.askSize+qtmTikers.bidSize);
+    printf("%f", result);
     const double absError = 0.001;
     EXPECT_NEAR(result, calculator.GetRatio({qtmTikers}), absError);
 }
@@ -175,5 +176,7 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
-
+    std::vector<row::Output> outputData = {{"QTM", 0.84, 0.84, 13, 16.97}};
+    std::vector<row::Quote>qtmTiker = { {15051420, 16.21, 137, 17.05, 13, 13}};
+    EXPECT_EQ(outputData, utils::FormedOutputData("QTM", qtmTiker));
 }
