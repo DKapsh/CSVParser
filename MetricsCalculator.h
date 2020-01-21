@@ -15,7 +15,7 @@ namespace metrics
             std::vector<double> AskSubBid(const std::vector<row::Quote>& data);
             double GetMin(const std::vector<double>& data);
             double GetMax(const std::vector<double>& data);
-            double GetRatio();
+            double GetRatio(const std::vector<row::Quote>& data);
         private:
             std::vector<row::Row> m_data;
             std::string m_tickerType;

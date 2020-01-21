@@ -168,10 +168,11 @@ TEST(MetricsCounter, MinOfSubAskAndBid_ThrowIfDataIsEmpty)
 TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
 {
     row::Row qtmTiker = {15051420, "QTM", 16.21, 137, 17.05, 13, 13};
+    row::Quote qtmTikers = {15051420, 16.21, 137, 17.05, 13, 13};
     metrics::MetricsCalculator calculator({qtmTiker});
     double result = (qtmTiker.bid*qtmTiker.askSize + qtmTiker.bidSize*qtmTiker.ask)/(qtmTiker.askSize+qtmTiker.bidSize);
     const double absError = 0.001;
-    EXPECT_NEAR(result, calculator.GetRatio(), absError);
+    EXPECT_NEAR(result, calculator.GetRatio({qtmTikers}), absError);
 }
 
 TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
@@ -179,7 +180,7 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
     metrics::MetricsCalculator calculator(s_qtmTikerWithDifferentBid);
     double correctRatioForqtmTicker = 16.984;
     const double absError = 0.0001;
-    EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(), absError);
+    EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(s_qtmTikersWithDifferentBid), absError);
 }
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
