@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include "MetricsCalculator.h"
 
-metrics::MetricsCalculator::MetricsCalculator(const std::vector<row::Row>& data):m_data(data)
+metrics::MetricsCalculator::MetricsCalculator()
 {
 }
 
@@ -19,11 +19,6 @@ uint64_t metrics::MetricsCalculator::VolumeSum(const std::vector<row::Quote>& da
         sum += row.volume;
     }
     return sum;
-}
-
-void metrics::MetricsCalculator::SetTickerType(const std::string& tickerType)
-{
-    m_tickerType = tickerType;
 }
 
 std::vector<double> metrics::MetricsCalculator::AskSubBid(const std::vector<row::Quote>& data)
