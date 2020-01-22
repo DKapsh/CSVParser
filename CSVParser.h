@@ -9,9 +9,9 @@ namespace parser
     class CSVParser
     {
         public:
-            explicit CSVParser(std::stringstream& in, std::stringstream& out);
+            explicit CSVParser(std::stringstream& in);
             void ParseData(std::map<std::string, std::vector<row::Quote>>& inputData);
-            void Write(const std::map<std::string, std::vector<row::Quote>>& outputData);
+            void Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::stringstream & out);
             
         private:
             std::vector<std::string> m_lines;

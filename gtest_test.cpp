@@ -89,7 +89,7 @@ TEST(CSVParser, SetRowStructFromSplitedStringInMapWithOneElement)
 TEST(CSVParser, SetVectorOfRowsFromStream)
 {
     std::stringstream in (s_marketData), out;
-    parser::CSVParser parser(in, out);
+    parser::CSVParser parser(in);
     std::map<std::string, std::vector<row::Quote>> tickerMap;
     parser.ParseData(tickerMap);
     EXPECT_EQ(s_tickerData, tickerMap);
@@ -175,18 +175,18 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
-    row::Output outputData = {"QTM", 0.84, 0.84, 13, 16.977};
-    std::vector<row::Quote>qtmTiker = { {15051420, 16.21, 137, 17.05, 13, 13}};
+    std::string outputData = "QTM, 0.840000, 0.840000, 13, 16.977200";
+    std::vector<row::Quote>qtmTiker = {{15051420, 16.21, 137, 17.05, 13, 13}};
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", qtmTiker));
 }
 
 TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
 {
-    row::Output outputData = {"QTM", 0.84, 0.05, 54354, 16.984};
+    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056";
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
 }
 
-TEST(CSVParser, SetFormedDataIntoStream)
+/*TEST(CSVParser, SetFormedDataIntoStream)
 {
     std::stringstream out, in;
     parser::CSVParser parser(in, out);
@@ -194,5 +194,5 @@ TEST(CSVParser, SetFormedDataIntoStream)
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}}};
     parser.Write(tickerMap);
     EXPECT_EQ(out.str(), outString);
-}
+}*/
 

@@ -1,6 +1,8 @@
 #include <vector>
 #include <stdio.h>
 #include <sstream>
+#include <iostream>
+#include <string>
 #include "ParserUtils.h"
 #include "MetricsCalculator.h"
 
@@ -54,15 +56,14 @@ void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::
     }   
 }
 
-row::Output utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
+std::string utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
 {
-    row::Output tmp;
+    std::string tmp = ticker +", ";
     metrics::MetricsCalculator calculator;
-    tmp.ticker = ticker;
-    tmp.max = calculator.GetMax(calculator.AskSubBid(inputData));
-    tmp.min = calculator.GetMin(calculator.AskSubBid(inputData));
-    tmp.sum = calculator.VolumeSum(inputData);
-    tmp.ratio = calculator.GetRatio(inputData);
+    tmp += std::to_string(calculator.GetMax(calculator.AskSubBid(inputData))) + ", ";
+    tmp += std::to_string(calculator.GetMin(calculator.AskSubBid(inputData)))+ ", ";
+    tmp += std::to_string(calculator.VolumeSum(inputData))+ ", ";
+    tmp += std::to_string(calculator.GetRatio(inputData));
     return tmp;
 }
 
