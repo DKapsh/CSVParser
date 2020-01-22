@@ -11,10 +11,10 @@ namespace metrics
         public:
             explicit MetricsCalculator();
             uint64_t VolumeSum(const std::vector<row::Quote>& data);
-            std::vector<double> AskSubBid(const std::vector<row::Quote>& data);
-            double GetMin(const std::vector<double>& data);
-            double GetMax(const std::vector<double>& data);
-            double GetRatio(const std::vector<row::Quote>& data);
+            std::vector<float> AskSubBid(const std::vector<row::Quote>& data);
+            float GetMin(const std::vector<float>& data);
+            float GetMax(const std::vector<float>& data);
+            float GetRatio(const std::vector<row::Quote>& data);
     };
 }
 

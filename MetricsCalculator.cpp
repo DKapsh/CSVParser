@@ -21,9 +21,9 @@ uint64_t metrics::MetricsCalculator::VolumeSum(const std::vector<row::Quote>& da
     return sum;
 }
 
-std::vector<double> metrics::MetricsCalculator::AskSubBid(const std::vector<row::Quote>& data)
+std::vector<float> metrics::MetricsCalculator::AskSubBid(const std::vector<row::Quote>& data)
 {
-    std::vector<double> result;
+    std::vector<float> result;
     for(const auto& row : data)
     {
         result.push_back(row.ask - row.bid);
@@ -31,7 +31,7 @@ std::vector<double> metrics::MetricsCalculator::AskSubBid(const std::vector<row:
     return result;
 }
 
-double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
+float metrics::MetricsCalculator::GetMin(const std::vector<float>& data)
 {
     if (data.empty())
     {
@@ -40,7 +40,7 @@ double metrics::MetricsCalculator::GetMin(const std::vector<double>& data)
     return *(std::min_element(data.begin(), data.end()));
 }
 
-double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
+float metrics::MetricsCalculator::GetMax(const std::vector<float>& data)
 {
     if (data.empty())
     {
@@ -49,10 +49,10 @@ double metrics::MetricsCalculator::GetMax(const std::vector<double>& data)
     return *(std::max_element(data.begin(), data.end()));
 }
 
-double metrics::MetricsCalculator::GetRatio(const std::vector<row::Quote>& data)
+float metrics::MetricsCalculator::GetRatio(const std::vector<row::Quote>& data)
 {
-    double numerator = 0;
-    double denumerator = 0;
+    float numerator = 0;
+    float denumerator = 0;
     for(const auto& row : data)
     {
         numerator += row.bid * row.askSize + row.ask * row.bidSize;
