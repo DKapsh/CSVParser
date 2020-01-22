@@ -54,7 +54,7 @@ void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::
     }   
 }
 
-std::vector<row::Output> utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
+row::Output utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
 {
     row::Output tmp;
     metrics::MetricsCalculator calculator;
@@ -63,7 +63,7 @@ std::vector<row::Output> utils::FormedOutputData(const std::string& ticker, cons
     tmp.min = calculator.GetMin(calculator.AskSubBid(inputData));
     tmp.sum = calculator.VolumeSum(inputData);
     tmp.ratio = calculator.GetRatio(inputData);
-    return {tmp};
+    return tmp;
 }
 
 
