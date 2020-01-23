@@ -21,5 +21,9 @@ void parser::CSVParser::ParseData(std::map<std::string, std::vector<row::Quote>>
 void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::stringstream & out)
 {
     auto tickerType = outputData.begin();
-    out << utils::FormedOutputData("T", tickerType->second);
+    for(auto iter = outputData.begin(); iter != outputData.end(); ++iter)
+    {
+        out << utils::FormedOutputData(iter->first, iter->second);
+    }
+    
 }

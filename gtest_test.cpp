@@ -206,8 +206,8 @@ TEST(CSVParser, SetFormedDataWithTwoTickerTypeIntoStream)
 {
     std::stringstream out, in;
     parser::CSVParser parser(in);
-    const std::string outString = "T, 0.040000, 0.040000, 10253, 47.486668\n"
-                                  "QTM, 0.840000, 0.050000, 54354, 16.984056\n";
+    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
+                                  "T, 0.040000, 0.040000, 10253, 47.486668\n";
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}},
                                                                       {"QTM", s_qtmTikersWithDifferentBid}};
     parser.Write(tickerMap, out);
