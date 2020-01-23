@@ -196,3 +196,9 @@ TEST(CSVParser, SetFormedDataIntoStream)
     EXPECT_EQ(out.str(), outString);
 }
 
+TEST(CSVParser, AddLFToTheEndOfTheString)
+{
+    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056\n";
+    EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
+}
+
