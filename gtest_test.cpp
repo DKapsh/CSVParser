@@ -186,13 +186,13 @@ TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
 }
 
-/*TEST(CSVParser, SetFormedDataIntoStream)
+TEST(CSVParser, SetFormedDataIntoStream)
 {
     std::stringstream out, in;
-    parser::CSVParser parser(in, out);
-    const std::string outString = "T, 15051420, 47.47, 10, 47.51, 14, 10253";
+    parser::CSVParser parser(in);
+    const std::string outString = "T, 0.040000, 0.040000, 10253, 47.486668";
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}}};
-    parser.Write(tickerMap);
+    parser.Write(tickerMap, out);
     EXPECT_EQ(out.str(), outString);
-}*/
+}
 
