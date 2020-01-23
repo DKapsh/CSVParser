@@ -91,7 +91,7 @@ TEST(CSVParser, SetVectorOfRowsFromStream)
     std::stringstream in (s_marketData), out;
     parser::CSVParser parser(in);
     std::map<std::string, std::vector<row::Quote>> tickerMap;
-    parser.ParseData(tickerMap);
+    parser.Read(tickerMap);
     EXPECT_EQ(s_tickerData, tickerMap);
 }
 
