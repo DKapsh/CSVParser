@@ -214,3 +214,11 @@ TEST(CSVParser, SetFormedDataWithTwoTickerTypeIntoStream)
     EXPECT_EQ(outString, out.str());
 }
 
+TEST(CSVParser, NoThrowIfDataForOutputIsEmpty)
+{
+    std::stringstream out, in;
+    parser::CSVParser parser(in);
+    const std::map<std::string, std::vector<row::Quote>> tickerMap = {};
+    EXPECT_NO_THROW(parser.Write(tickerMap, out));
+}
+
