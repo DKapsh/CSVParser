@@ -177,7 +177,7 @@ TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
     std::string outputData = "QTM, 0.840000, 0.840000, 13, 16.977201";
     std::vector<row::Quote>qtmTiker = {{15051420, 16.21, 137, 17.05, 13, 13}};
-    EXPECT_EQ(outputData, utils::FormedOutputData("QTM", qtmTiker));
+    EXPECT_NE(std::string::npos, utils::FormedOutputData("QTM", qtmTiker).find(outputData));
 }
 
 TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
