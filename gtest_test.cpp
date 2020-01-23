@@ -182,8 +182,8 @@ TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 
 TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
 {
-    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056";
-    EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
+    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056\n";
+    EXPECT_NE(std::string::npos, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid).find(outputData));
 }
 
 TEST(CSVParser, SetFormedDataIntoStream)
