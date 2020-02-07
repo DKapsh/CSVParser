@@ -63,6 +63,10 @@ float metrics::MetricsCalculator::GetRatio(const std::vector<row::Quote>& data)
 
 uint64_t metrics::MetricsCalculator::GetMaxDifferenceBetweenTimestamps(const std::vector<row::Quote>& data)
 {
+    if(data.empty())
+    {
+        throw std::runtime_error {"Input vector is empty"};
+    }
     if(data.size() == 1)
     {
         return data[0].timestamp;
