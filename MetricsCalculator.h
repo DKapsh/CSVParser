@@ -15,6 +15,7 @@ namespace metrics
             float GetMin(const std::vector<float>& data);
             float GetMax(const std::vector<float>& data);
             float GetRatio(const std::vector<row::Quote>& data);
+            uint64_t GetMaxDifferenceBetweenTimestamps(const std::vector<row::Quote>& data);
     };
 }
 

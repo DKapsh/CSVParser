@@ -180,6 +180,13 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
     EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(s_qtmTikersWithDifferentBid), absError);
 }
 
+TEST(MetricsCounter, GetMaxDifferentBetweenTwoQuote)
+{
+    metrics::MetricsCalculator calculator;
+    const double correctDifference = 357;
+    EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_qtmTikersWithDifferentBid));
+}
+
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
     std::string outputData = "QTM, 0.840000, 0.840000, 13, 16.977201";
