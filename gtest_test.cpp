@@ -171,6 +171,12 @@ TEST(MetricsCounter, MinOfSubAskAndBid_ThrowIfDataIsEmpty)
     EXPECT_THROW(calculator.GetMin({}), std::exception);
 }
 
+TEST(MetricsCounter, GetMaxDifference_ThrowIfDataIsEmpty)
+{
+    metrics::MetricsCalculator calculator;
+    EXPECT_THROW(calculator.GetMaxDifferenceBetweenTimestamps({}), std::exception);
+}
+
 TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForOneQuote)
 {
     row::Quote qtmTikers = {15051420, 16.21, 137, 17.05, 13, 13};
