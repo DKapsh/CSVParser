@@ -218,14 +218,14 @@ TEST(MetricsCounter, GetMaxDifferenceForOneQuote)
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
-    std::string outputData = "QTM, 0.840000, 0.840000, 13, 16.977201";
+    std::string outputData = "QTM, 0.840000, 0.840000, 13, 15051420, 16.977201";
     std::vector<row::Quote>qtmTiker = {{15051420, 16.21, 137, 17.05, 13, 13}};
     EXPECT_NE(std::string::npos, utils::FormedOutputData("QTM", qtmTiker).find(outputData));
 }
 
 TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
 {
-    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056";
+    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 357, 16.984056";
     EXPECT_NE(std::string::npos, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid).find(outputData));
 }
 
@@ -233,7 +233,7 @@ TEST(CSVParser, PreparedDataForOutput)
 {
     parser::CSVParser parser;
     std::string out;
-    const std::string outString = "T, 0.040000, 0.040000, 10253, 47.486668";
+    const std::string outString = "T, 0.040000, 0.040000, 10253, 15051420, 47.486668";
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}}};
     parser.CalculateMetrics(tickerMap, out);
     EXPECT_NE(std::string::npos, out.find(outString));
@@ -241,7 +241,7 @@ TEST(CSVParser, PreparedDataForOutput)
 
 TEST(CSVParser, AddLFToTheEndOfTheString)
 {
-    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 16.984056\n";
+    std::string outputData = "QTM, 0.840000, 0.050000, 54354, 357, 16.984056\n";
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
 }
 
@@ -257,8 +257,8 @@ TEST(CSVParser, CalculatedDataWithTwoTickerType)
 {
     parser::CSVParser parser;
     std::string out;
-    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
-                                  "T, 0.040000, 0.040000, 10253, 47.486668\n";
+    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 357, 16.984056\n"
+                                  "T, 0.040000, 0.040000, 10253, 15051420, 47.486668\n";
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}},
                                                                       {"QTM", s_qtmTikersWithDifferentBid}};
     parser.CalculateMetrics(tickerMap, out);

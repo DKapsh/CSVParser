@@ -62,6 +62,7 @@ std::string utils::FormedOutputData(const std::string& ticker, const std::vector
     tmp += std::to_string(calculator.GetMax(calculator.AskSubBid(inputData))) + ", ";
     tmp += std::to_string(calculator.GetMin(calculator.AskSubBid(inputData)))+ ", ";
     tmp += std::to_string(calculator.VolumeSum(inputData))+ ", ";
+    tmp += std::to_string(calculator.GetMaxDifferenceBetweenTimestamps(inputData))+ ", ";
     tmp += std::to_string(calculator.GetRatio(inputData))+'\n';
     return tmp;
 }
