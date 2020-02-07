@@ -57,7 +57,7 @@ void utils::SetRow(const std::vector<std::string>& splitedString, std::map<std::
 
 std::string utils::FormedOutputData(const std::string& ticker, const std::vector<row::Quote>& inputData)
 {
-    std::string tmp = ticker +", ";
+    std::string tmp = ticker +",";
     metrics::MetricsCalculator calculator;
     tmp += std::to_string(calculator.GetMax(calculator.AskSubBid(inputData))) + ",";
     tmp += std::to_string(calculator.GetMin(calculator.AskSubBid(inputData)))+ ",";
