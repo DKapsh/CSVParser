@@ -209,6 +209,13 @@ TEST(MetricsCounter, GetMaxDifferenceBetweenFourQuote)
     EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_fourQtmTikers));
 }
 
+TEST(MetricsCounter, GetMaxDifferenceForOneQuote)
+{
+    metrics::MetricsCalculator calculator;
+    const double correctDifference = 15051420;
+    EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps({{15051420, 47.47, 10, 47.51, 14, 10253}}));
+}
+
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
 {
     std::string outputData = "QTM, 0.840000, 0.840000, 13, 16.977201";
