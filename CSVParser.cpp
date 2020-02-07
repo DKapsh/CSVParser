@@ -5,7 +5,7 @@
 #include "CSVParser.h"
 #include "ParserUtils.h"
 
-parser::CSVParser::CSVParser(std::stringstream& in)
+parser::CSVParser::CSVParser(std::istream& in)
 {   
     m_lines = utils::ReadRows(in);
 }
@@ -18,7 +18,7 @@ void parser::CSVParser::Read(std::map<std::string, std::vector<row::Quote>>& inp
     }
 }
 
-void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::stringstream & out)
+void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::ostream & out)
 {
     auto tickerType = outputData.begin();
     for(auto iter = outputData.begin(); iter != outputData.end(); ++iter)

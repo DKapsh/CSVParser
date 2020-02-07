@@ -25,7 +25,7 @@ std::vector<std::string> utils::SplitString(const std::string& input)
     return row;
 }
 
-std::vector<std::string> utils::ReadRows(std::stringstream& ss)
+std::vector<std::string> utils::ReadRows(std::istream& ss)
 {
     std::string tmp;
     std::vector<std::string> result;
