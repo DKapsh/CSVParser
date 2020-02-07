@@ -26,6 +26,10 @@ namespace
     const std::vector<row::Quote>s_threeQtmTikers = {{15051420, 16.21, 137, 17.05, 13, 13},
                                                      {15051422, 16.21, 137, 17.05, 13, 13},
                                                      {15051777, 17, 11, 17.05, 19, 54341}};
+    const std::vector<row::Quote>s_fourQtmTikers = {{15051420, 16.21, 137, 17.05, 13, 13},
+                                                     {15051422, 16.21, 137, 17.05, 13, 13},
+                                                     {15051424, 16.21, 137, 17.05, 13, 13},
+                                                     {15051777, 17, 11, 17.05, 19, 54341}};
                                                                 
                                                 
 }
@@ -196,6 +200,13 @@ TEST(MetricsCounter, GetMaxDifferenceBetweenThreeQuote)
     metrics::MetricsCalculator calculator;
     const double correctDifference = 355;
     EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_threeQtmTikers));
+}
+
+TEST(MetricsCounter, GetMaxDifferenceBetweenFourQuote)
+{
+    metrics::MetricsCalculator calculator;
+    const double correctDifference = 353;
+    EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_fourQtmTikers));
 }
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
