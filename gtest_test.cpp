@@ -203,16 +203,6 @@ TEST(CSVParser, AddLFToTheEndOfTheString)
     EXPECT_EQ(outputData, utils::FormedOutputData("QTM", s_qtmTikersWithDifferentBid));
 }
 
-TEST(CSVParser, SetFormedDataWithTwoTickerTypeIntoStream)
-{
-    std::stringstream out, in;
-    parser::CSVParser parser(in);
-    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
-                                  "T, 0.040000, 0.040000, 10253, 47.486668\n";
-    parser.Write(outString, out);
-    EXPECT_EQ(outString, out.str());
-}
-
 TEST(CSVParser, NoThrowIfDataIsEmpty)
 {
     std::stringstream in;
@@ -233,4 +223,14 @@ TEST(CSVParser, CalculatedDataWithTwoTickerType)
                                                                       {"QTM", s_qtmTikersWithDifferentBid}};
     parser.CalculateMetrics(tickerMap, out);
     EXPECT_EQ(outString, out);
+}
+
+TEST(CSVParser, SetFormedDataWithTwoTickerTypeIntoStream)
+{
+    std::stringstream out, in;
+    parser::CSVParser parser(in);
+    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
+                                  "T, 0.040000, 0.040000, 10253, 47.486668\n";
+    parser.Write(outString, out);
+    EXPECT_EQ(outString, out.str());
 }
