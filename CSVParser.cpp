@@ -20,7 +20,10 @@ void parser::CSVParser::Read(std::map<std::string, std::vector<row::Quote>>& inp
 
 void parser::CSVParser::CalculateMetrics(const std::map<std::string, std::vector<row::Quote>>& outputData, std::string& out)
 {
-
+    for(auto iter = outputData.begin(); iter != outputData.end(); ++iter)
+    {
+        out += utils::FormedOutputData(iter->first, iter->second);
+    }
 }
 
 void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::ostream & out)
