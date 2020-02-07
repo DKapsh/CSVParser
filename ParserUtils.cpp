@@ -25,6 +25,24 @@ std::vector<std::string> utils::SplitString(const std::string& input)
     return row;
 }
 
+std::vector<std::string> utils::SplitStringByDelimiter(const std::string& input, char delimiter)
+{
+    std::vector<std::string> row;
+    int posPrev = 0;
+    int posNext = 0;
+    while(posNext < input.length())
+    {   
+        posNext = input.find(',', posPrev);
+        if(posNext == std::string::npos)
+        {
+            posNext == input.length();
+        }
+        row.push_back(input.substr(posPrev, posNext- posPrev));
+        posPrev = posNext + 1;
+    }
+    return row;
+}
+
 std::vector<std::string> utils::ReadRows(std::istream& ss)
 {
     std::string tmp;

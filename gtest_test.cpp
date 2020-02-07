@@ -47,6 +47,13 @@ TEST(CSVParser, ParseAllValuesInAString)
     EXPECT_EQ(row, utils::SplitString(inputString));
 }
 
+TEST(CSVParser, ParseAllValuesInAStringIfDelimiterIsColon)
+{
+    std::string inputString = "15051420:T:47.47:10,47.51:14:10253";
+    std::vector<std::string> row = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
+    EXPECT_EQ(row, utils::SplitStringByDelimiter(inputString, ':'));
+}
+
 TEST(CSVParser, GetTwoRowFromStream)
 {
     std::stringstream in ("15051420,T,47.47,10,47.51,14,10253\n15051420,BC,77.71,12,79.13,12,14");
