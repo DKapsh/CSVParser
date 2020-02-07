@@ -26,12 +26,7 @@ void parser::CSVParser::CalculateMetrics(const std::map<std::string, std::vector
     }
 }
 
-void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::ostream & out)
-{
-    auto tickerType = outputData.begin();
-    for(auto iter = outputData.begin(); iter != outputData.end(); ++iter)
-    {
-        out << utils::FormedOutputData(iter->first, iter->second);
-    }
-    
+void parser::CSVParser::Write(const std::string& outData, std::ostream & out)
+{ 
+    out << outData;
 }
