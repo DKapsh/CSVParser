@@ -21,7 +21,7 @@ ExternalProject_Get_Property(gtest source_dir binary_dir)
 ################
 # Define a test
 add_executable(gtest_test gtest_test.cpp CSVParser.cpp MetricsCalculator.cpp ParserUtils.cpp)
-
+add_executable(main main.cpp CSVParser.cpp MetricsCalculator.cpp ParserUtils.cpp)
 ######################################
 # Configure the test to use GoogleTest
 #

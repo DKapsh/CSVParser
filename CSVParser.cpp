@@ -18,6 +18,11 @@ void parser::CSVParser::Read(std::map<std::string, std::vector<row::Quote>>& inp
     }
 }
 
+void parser::CSVParser::CalculateMetrics(const std::map<std::string, std::vector<row::Quote>>& outputData, std::string& out)
+{
+
+}
+
 void parser::CSVParser::Write(const std::map<std::string, std::vector<row::Quote>>& outputData, std::ostream & out)
 {
     auto tickerType = outputData.begin();

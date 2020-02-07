@@ -222,3 +222,15 @@ TEST(CSVParser, NoThrowIfDataForOutputIsEmpty)
     EXPECT_NO_THROW(parser.Write(tickerMap, out));
 }
 
+TEST(CSVParser, CalculatedDataWithTwoTickerType)
+{
+    std::stringstream in;
+    parser::CSVParser parser(in);
+    std::string out;
+    const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
+                                  "T, 0.040000, 0.040000, 10253, 47.486668\n";
+    const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}},
+                                                                      {"QTM", s_qtmTikersWithDifferentBid}};
+    parser.CalculateMetrics(tickerMap, out);
+    EXPECT_EQ(outString, out);
+}
