@@ -5,9 +5,9 @@
 #include "CSVParser.h"
 #include "ParserUtils.h"
 
-parser::CSVParser::CSVParser()
+parser::CSVParser::CSVParser(char delimiter)
 {   
-    
+    m_delimiter = delimiter;
 }
 
 void parser::CSVParser::Read(std::istream& in, std::map<std::string, std::vector<row::Quote>>& inputData)
@@ -15,7 +15,7 @@ void parser::CSVParser::Read(std::istream& in, std::map<std::string, std::vector
     std::vector<std::string> lines = utils::ReadRows(in);
     for(auto& line : lines)
     {
-        utils::SetRow(utils::SplitStringByDelimiter(line, ','), inputData);
+        utils::SetRow(utils::SplitStringByDelimiter(line, m_delimiter), inputData);
     }
 }
 
