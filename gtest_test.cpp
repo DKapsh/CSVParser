@@ -23,6 +23,10 @@ namespace
                                                  {15051421, 16.21, 137, 17.05, 13, 13}};
     const std::vector<row::Quote>s_qtmTikersWithDifferentBid = {{15051420, 16.21, 137, 17.05, 13, 13},
                                                                 {15051777, 17, 11, 17.05, 19, 54341}};
+    const std::vector<row::Quote>s_threeQtmTikers = {{15051420, 16.21, 137, 17.05, 13, 13},
+                                                     {15051422, 16.21, 137, 17.05, 13, 13},
+                                                     {15051777, 17, 11, 17.05, 19, 54341}};
+                                                                
                                                 
 }
 
@@ -180,11 +184,18 @@ TEST(MetricsCounter, RatioOfAmountsReturnCorrectResultForTwoQuote)
     EXPECT_NEAR(correctRatioForqtmTicker, calculator.GetRatio(s_qtmTikersWithDifferentBid), absError);
 }
 
-TEST(MetricsCounter, GetMaxDifferentBetweenTwoQuote)
+TEST(MetricsCounter, GetMaxDifferenceBetweenTwoQuote)
 {
     metrics::MetricsCalculator calculator;
     const double correctDifference = 357;
     EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_qtmTikersWithDifferentBid));
+}
+
+TEST(MetricsCounter, GetMaxDifferenceBetweenThreeQuote)
+{
+    metrics::MetricsCalculator calculator;
+    const double correctDifference = 355;
+    EXPECT_EQ(correctDifference, calculator.GetMaxDifferenceBetweenTimestamps(s_threeQtmTikers));
 }
 
 TEST(CSVParser, FormedCorrectOutputString_SingleQTMTicker)
