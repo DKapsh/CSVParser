@@ -30,21 +30,21 @@ TEST(CSVParser, ParseTwoValueInAString)
 {
     std::string inputString = "15051420,T";
     std::vector<std::string> row = {"15051420", "T"};
-    EXPECT_EQ(row, utils::SplitString(inputString));
+    EXPECT_EQ(row, utils::SplitStringByDelimiter(inputString, ','));
 }
 
 TEST(CSVParser, ParseThreeValueInAString)
 {
     std::string inputString = "15051420,T,47.47";
     std::vector<std::string> row = {"15051420", "T", "47.47"};
-    EXPECT_EQ(row, utils::SplitString(inputString));
+    EXPECT_EQ(row, utils::SplitStringByDelimiter(inputString, ','));
 }
 
 TEST(CSVParser, ParseAllValuesInAString)
 {
     std::string inputString = "15051420,T,47.47,10,47.51,14,10253";
     std::vector<std::string> row = {"15051420", "T", "47.47", "10", "47.51", "14", "10253"};
-    EXPECT_EQ(row, utils::SplitString(inputString));
+    EXPECT_EQ(row, utils::SplitStringByDelimiter(inputString, ','));
 }
 
 TEST(CSVParser, ParseAllValuesInAStringIfDelimiterIsColon)
