@@ -5,14 +5,15 @@
 #include "CSVParser.h"
 #include "ParserUtils.h"
 
-parser::CSVParser::CSVParser(std::istream& in)
+parser::CSVParser::CSVParser()
 {   
-    m_lines = utils::ReadRows(in);
+    
 }
 
-void parser::CSVParser::Read(std::map<std::string, std::vector<row::Quote>>& inputData)
+void parser::CSVParser::Read(std::istream& in, std::map<std::string, std::vector<row::Quote>>& inputData)
 {
-    for(auto& line : m_lines)
+    std::vector<std::string> lines = utils::ReadRows(in);
+    for(auto& line : lines)
     {
         utils::SetRow(utils::SplitStringByDelimiter(line, ','), inputData);
     }

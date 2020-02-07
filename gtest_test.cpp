@@ -93,12 +93,12 @@ TEST(CSVParser, SetRowStructFromSplitedStringInMapWithOneElement)
     EXPECT_EQ(outputMap, inputMap);
 }
 
-TEST(CSVParser, SetVectorOfRowsFromStream)
+TEST(CSVParser, ReadMapOfTickersFromStream)
 {
     std::stringstream in (s_marketData), out;
-    parser::CSVParser parser(in);
+    parser::CSVParser parser;
     std::map<std::string, std::vector<row::Quote>> tickerMap;
-    parser.Read(tickerMap);
+    parser.Read(in, tickerMap);
     EXPECT_EQ(s_tickerData, tickerMap);
 }
 
@@ -195,8 +195,7 @@ TEST(CSVParser, FormedCorrectOutputString_TwoQTMTicker)
 
 TEST(CSVParser, PreparedDataForOutput)
 {
-    std::stringstream in;
-    parser::CSVParser parser(in);
+    parser::CSVParser parser;
     std::string out;
     const std::string outString = "T, 0.040000, 0.040000, 10253, 47.486668";
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {{"T", {{15051420, 47.47, 10, 47.51, 14, 10253}}}};
@@ -212,8 +211,7 @@ TEST(CSVParser, AddLFToTheEndOfTheString)
 
 TEST(CSVParser, NoThrowIfDataIsEmpty)
 {
-    std::stringstream in;
-    parser::CSVParser parser(in);
+    parser::CSVParser parser;
     std::string out;
     const std::map<std::string, std::vector<row::Quote>> tickerMap = {};
     EXPECT_NO_THROW(parser.CalculateMetrics(tickerMap, out));
@@ -221,8 +219,7 @@ TEST(CSVParser, NoThrowIfDataIsEmpty)
 
 TEST(CSVParser, CalculatedDataWithTwoTickerType)
 {
-    std::stringstream in;
-    parser::CSVParser parser(in);
+    parser::CSVParser parser;
     std::string out;
     const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
                                   "T, 0.040000, 0.040000, 10253, 47.486668\n";
@@ -234,8 +231,8 @@ TEST(CSVParser, CalculatedDataWithTwoTickerType)
 
 TEST(CSVParser, SetFormedDataWithTwoTickerTypeIntoStream)
 {
-    std::stringstream out, in;
-    parser::CSVParser parser(in);
+    std::stringstream out;
+    parser::CSVParser parser;
     const std::string outString = "QTM, 0.840000, 0.050000, 54354, 16.984056\n"
                                   "T, 0.040000, 0.040000, 10253, 47.486668\n";
     parser.Write(outString, out);
