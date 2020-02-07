@@ -63,8 +63,8 @@ float metrics::MetricsCalculator::GetRatio(const std::vector<row::Quote>& data)
 
 uint64_t metrics::MetricsCalculator::GetMaxDifferenceBetweenTimestamps(const std::vector<row::Quote>& data)
 {
-    if ( data.size() > 3)
-    {
+    if ( data.size() > 2)
+    {   
         return std::max({data[2].timestamp - data[1].timestamp, data[1].timestamp - data[0].timestamp});
     }
     else return (data[1].timestamp - data[0].timestamp);
