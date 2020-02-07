@@ -32,7 +32,7 @@ std::vector<std::string> utils::SplitStringByDelimiter(const std::string& input,
     int posNext = 0;
     while(posNext < input.length())
     {   
-        posNext = input.find(',', posPrev);
+        posNext = input.find(delimiter, posPrev);
         if(posNext == std::string::npos)
         {
             posNext == input.length();
